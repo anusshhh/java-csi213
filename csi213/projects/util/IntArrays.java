@@ -1,5 +1,7 @@
 package csi213.projects.util;
 
+import java.util.Arrays;
+
 /**
  * This {@code IntArrays} class provides methods for manipulating {@code int} arrays.
  *
@@ -27,7 +29,10 @@ public class IntArrays {
      * @param startIndex the start index of the region in which the sum of the elements needs to be calculated
      */
     public static int sumR(int[] a, int startIndex) {
-        return 0;
+        if (startIndex == a.length - 1) {
+            return a[startIndex];
+        }
+        return a[startIndex] + sumR(a, startIndex + 1);
     }
 
     /**
@@ -36,7 +41,16 @@ public class IntArrays {
      * @param a an {@code int} array
      */
     public static int minSum2(int[] a) {
-        return 0;
+        int minSum = Integer.MAX_VALUE;
+        for (int i = 0; i < a.length - 1; i++) {
+            for (int j = i + 1; j < a.length; j++) {
+                int sum = a[i] + a[j];
+                if (sum < minSum) {
+                    minSum = sum;
+                }
+            }
+        }
+        return minSum;
     }
 
     /**
@@ -46,7 +60,18 @@ public class IntArrays {
      * @param k a positive integer
      */
     public static int minSum(int[] a, int k) {
-        return 0;
+        int minSum = Integer.MAX_VALUE;
+        Arrays.sort(a);
+        for (int i = 0; i + k <= a.length; i++) {
+            int temp = 0;
+            for (int j = i; j < i + k; j++) {
+                temp += a[j];
+            }
+            if (temp < minSum)
+                minSum = temp;
+        }
+
+        return minSum;
     }
 
     /**
